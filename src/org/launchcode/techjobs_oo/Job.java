@@ -1,17 +1,25 @@
 package org.launchcode.techjobs_oo;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
+
+import static java.util.Set.of;
 
 public class Job {
 
     private int id;
     private static int nextId = 1;
+    private int nullFields = 0;
 
     private String name;
     private Employer employer;
     private Location location;
     private PositionType positionType;
     private CoreCompetency coreCompetency;
+    private Object o;
 
     // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
     //  other five fields. The second constructor should also call the first in order to initialize
@@ -31,6 +39,14 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
+    private Object checkIfNull(Object o){
+        if (o == null || o.toString() ==""){
+            nullFields++;
+            return "Data not available";
+        } else
+            return o;
+    }
+
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 
@@ -47,6 +63,21 @@ public class Job {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        String str = "\n" +
+                    "ID: "+ checkIfNull(id)+ "\n" +
+                    "Name: "+checkIfNull(name)+ "\n" +
+                    "Employer: "+checkIfNull(employer)+ "\n" +
+                    "Location: "+checkIfNull(location)+ "\n" +
+                    "Position Type: "+checkIfNull(positionType)+"\n" +
+                    "Core Competency: "+checkIfNull(coreCompetency) +"\n" +
+                    "";
+        if(nullFields >= 5){
+            return "OOPS! This job does not seem to exist.";
+        }
+        return str;
+    }
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
 

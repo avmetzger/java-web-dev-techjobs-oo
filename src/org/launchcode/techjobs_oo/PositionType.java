@@ -8,8 +8,8 @@ public class PositionType {
     private String value;
 
     public PositionType() {
-        id = nextId;
-        nextId++;
+        this.id = nextId;
+        this.nextId++;
     }
 
     public PositionType(String value) {

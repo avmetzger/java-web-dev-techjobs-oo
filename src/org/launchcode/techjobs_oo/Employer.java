@@ -8,8 +8,8 @@ public class Employer {
     private String value;
 
     public Employer() {
-        id = nextId;
-        nextId++;
+        this.id = nextId;
+        this.nextId++;
     }
 
     public Employer(String value) {
